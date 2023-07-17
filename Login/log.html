@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+    <style>
+      .button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+      .container {
+        width: 50%;
+        margin: 0 auto;
+        text-align: center;
+      }
+      input[type="text"], input[type="password"] {
+        width: 50%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+      }
+      input[type="submit"] {
+        width: 20%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+      .home-button {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    bottom: auto;
+    z-index: 9999;
+  }
+
+    </style>
+    <script>
+      function myFunction(e) {
+  coor = "Click here to login to reports page";
+  document.getElementById("demo").innerHTML = coor
+}
+function out() {
+  document.getElementById("demo").innerHTML = "";
+}
+    window.onload = function() {
+    let label = document.getElementById("username");
+    label.style.color = "blue";
+  };
+  function verifyUser()
+  {
+  var username = document.getElementById("username").value;
+  var password = document.getElementById("password").value;
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function()
+  {
+    if (this.readyState == 4 && this.status == 200)
+    {
+      var xmlDoc = this.responseXML;
+      var users = xmlDoc.getElementsByTagName("user");
+      var verified = false;
+      for (var i = 0; i < users.length; i++)
+      {
+        var xmlUsername = users[i].getElementsByTagName("username")[0].childNodes[0].nodeValue;
+        var xmlPassword = users[i].getElementsByTagName("password")[0].childNodes[0].nodeValue;
+        if (username == xmlUsername && password == xmlPassword)
+        {
+          verified = true;
+          break;
+        }
+      }
+      if (verified)
+      {
+        alert("Username and password verified!");
+      } else
+      {
+        alert("Invalid username or password!");
+      }
+    }
+  }
+  xhttp.open("GET","users.xml");
+  xhttp.send();
+}
+
+    </script>
+  </head>
+  <body style="background-color:black">
+  <br><br><br><br><br><br>
+  <button class="home-button" onclick="window.location.href='file:///D:/online%20quiz/index.html#home';"><i class="fa fa-home"></i></button>
+
+    <div class="container">
+      <form >
+        <label style="color: aliceblue; font-weight: bold; font-size: 18px;" for="username">Username:</label>
+        <input type="text" id="username" name="username" placeholder="Enter your mail id" required>
+        <br>
+        <label style="color: aliceblue; font-weight: bold; font-size: 18px;" for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        <br><br><br>
+        <button type="button" class="button" onclick="verifyUser()" onmousemove="myFunction(event)" onmouseout="out()">Login</button>
+        <h5 id="demo" style="color: aliceblue;" ></h5>
+      </form>
+    </div>
+    <br><br><br>
+    <div class="w3-container w3-center">
+        <br>
+      </div>
+  </body>
+</html>
